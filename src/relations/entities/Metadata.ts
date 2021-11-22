@@ -1,13 +1,7 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Photo } from './Photo';
 
-@Entity('metadata')
+@Entity('metadatas')
 export class Metadata {
   @PrimaryGeneratedColumn()
   id: number;
@@ -15,7 +9,6 @@ export class Metadata {
   width: number;
   @Column()
   height: number;
-  @OneToOne(() => Photo, { cascade: true })
-  @JoinColumn()
+  @OneToOne(() => Photo, (photo) => photo.metadata)
   photo: Photo;
 }
